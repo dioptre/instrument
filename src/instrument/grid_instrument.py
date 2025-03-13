@@ -6,10 +6,10 @@ import collections
 import sys
 
 try:
-	import launchpad_py as launchpad
+	import novation_launchpad as launchpad
 except ImportError as ex:
 	try:
-		import launchpad_py
+		import novation_launchpad
 	except ImportError as ex:
 		sys.exit("error loading launchpad_rtmidi.py")
 

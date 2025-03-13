@@ -87,8 +87,8 @@ class GridInstrument:
 	# Settings
 	note_callback = None
 	func_button_callback = None
-	kid_mode = False
-	debugging = False
+	kid_mode = True
+	debugging = True
 	intro_message = None
 	launchpad_pro_velocity_multiplier = 1
 	max_velocity = 127
@@ -127,7 +127,7 @@ class GridInstrument:
 					
 			elif self.lp.Check( 0, "mk2" ):
 				self.lp = launchpad.LaunchpadMk2()
-				if self.lp.Open():
+				if self.lp.Open( 0, "mk2" ):
 					print("Launchpad Mk2")
 					self._launchpad_model = "Mk2"    
 			else:
@@ -254,8 +254,7 @@ class GridInstrument:
 			self.lp.LedCtrlXY(lpX, lpY, self.NOTE_COLORS[self._launchpad_model][buttonType][0], self.NOTE_COLORS[self._launchpad_model][buttonType][1])
 		else:
 			colorSet = "Mk2"
-			self.lp.LedCtrlXY(lpX, lpY, self.NOTE_COLORS[colorSet][buttonType][0], self.NOTE_COLORS[colorSet][buttonType][1], self.NOTE_COLORS[colorSet][buttonType][2])
-			#self.lp.LedCtrlXY(10, 10,63,63,63)
+			self.lp.LedCtrlXY(lpX, lpY, self.NOTE_COLORS[colorSet][buttonType][0], self.NOTE_COLORS[colorSet][buttonType][1], self.NOTE_COLORS[colorSet][buttonType][2])			
 
 	def _scroll_text(self, text, colorKey):
 		if self._launchpad_model == "Mk1":
@@ -384,6 +383,8 @@ class GridInstrument:
 			if noteInfo[0] not in midiNotes:
 				midiNotes.append(noteInfo[0])
 		return midiNotes
+
+
 
 	# This takes 1-based coordinates with 1,1 being the lower left button
 	def _button_pressed(self, x, y, velocity):

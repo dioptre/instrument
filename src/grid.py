@@ -8,6 +8,10 @@ def note_callback(messageType, midiNote, velocity):
 	elif messageType == "note_off":
 		midiout.send_message([0x80, midiNote, velocity])
 
+def func_button_callback(x, y, pressed):
+	print(x, y, pressed)
+
+
 # Create a MIDI output port
 midiout = rtmidi.MidiOut()
 midiout.open_virtual_port("Grid Instrument (Virtual Port)")
@@ -16,6 +20,7 @@ midiout.open_virtual_port("Grid Instrument (Virtual Port)")
 instrument = GridInstrument()
 instrument.intro_message = 'grid'
 instrument.note_callback = note_callback
+instrument.func_button_callback = func_button_callback
 instrument.launchpad_pro_velocity_multiplier = 2.5
 instrument.min_velocity = 100
 instrument.max_velocity = 100

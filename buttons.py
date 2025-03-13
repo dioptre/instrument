@@ -94,6 +94,8 @@ def main():
 	#lp.LedSetMode(0)
 	lastBut = (-99,-99)
 	tStart = time.time()
+	lp.Reset()
+	lp.ButtonFlush()
 	while True:
 		if mode == 'Pro' or mode == 'ProMk3':
 			buts = lp.ButtonStateXY( mode = 'pro')
@@ -104,7 +106,13 @@ def main():
 			print( buts[0], buts[1], buts[2] )
 			#lp.LedSetMode(0)
 			#lp.LedCtrlPulseXYByCode(buts[0], buts[1], random.randint(40,130) )
-			lp.LedCtrlXY(buts[0], buts[1], random.randint(40,130), random.randint(40,130), random.randint(40,150) )
+			lp.LedCtrlXY(buts[0], buts[1],50, 0, 0)
+			# lp.midi.RawWrite( 144, 7, 40 )
+			# lp.LedCtrlRaw(9, 3, 3)
+			# lp.LedCtrlXY(0, 0, 3, 3)
+			# lp.LedAllOn()
+			# lp.LedCtrlRaw( 9, 3, 0)  # Pad 1 red
+			# lp.LedCtrlRaw( 11, 0, 3)  # Pad 3 green
 			#lp.ButtonFlush()
 			#lp.LedCtrlRawRapidHome()
 			#AllLEDs = [ lp.LedGetColor( 0, 3 ) ] * 80
